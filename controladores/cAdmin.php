@@ -7,6 +7,10 @@
         
         public function __construct() {
             $this->vista = '';
+
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
             
             // Verificar que el usuario esté logueado y sea administrador
             session_start();

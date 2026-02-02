@@ -1,46 +1,55 @@
 <?php
-require_once 'config/config.php';
+require_once 'modelos/mUsuario.php';
 
-if (!isset($_GET['c']))
-    $_GET['c'] = DEF_CONTROLLER;
-if (!isset($_GET['m']))
-    $_GET['m'] = DEF_METHOD;
-
-$nombreControlador = $_GET['c'];
-$nombreMetodo = $_GET['m'];
-
-$rutaArchivoControlador = RUTA_CONTROLADORES . $nombreControlador . '.php';
-
-if (file_exists($rutaArchivoControlador)) {
-    require_once $rutaArchivoControlador;
-
-    $nombreClase = 'C' . $nombreControlador;
-
-    if (class_exists($nombreClase)) {
-        $objControlador = new $nombreClase();
-
-        if (method_exists($objControlador, $nombreMetodo)) {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $datos = $objControlador->{$nombreMetodo}($_POST);
-            } else {
-                $datos = $objControlador->{$nombreMetodo}();
-            }
+class CAdmin {
+    
+    public $vista;
+    
+    public function __construct() {
+        $this->vista = '';
+        
+        // 1. Iniciar sesión solo si no está iniciada (Corrección del error duplicado)
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
         }
-
-        if ($objControlador->vista != '') {
-            $rutaVista = RUTA_VISTAS . $objControlador->vista . '.php';
-
-            // --- INICIO DEPURACIÓN ---
-            // Descomenta esto para ver qué ruta está intentando cargar
-            echo "Intento cargar la vista: " . $rutaVista . "<br>"; 
-            // -------------------------
-            if (is_array($datos))
-                extract($datos);
-
-            if (file_exists($rutaVista)) {
-                require_once $rutaVista;
-            }
+        
+        // 2. Verificar permisos
+        // Al quitar los espacios de la línea 1, este header() ya funcionará correctamente
+        if (!isset($_SESSION['perfil']) || $_SESSION['perfil'] !== 'c') {
+            header('Location: index.php');
+            exit;
         }
+    }
+    
+    public function menu() {
+        $this->vista = 'menuAdmin';
+        // Verificamos que exista la variable de sesión antes de enviarla para evitar errores
+        $nombre = isset($_SESSION['nombreUsuario']) ? $_SESSION['nombreUsuario'] : 'Usuario';
+        return ['nombreUsuario' => $nombre];
+    }
+    
+    public function deportesUsuarios() {
+        $modeloUsuario = new MUsuario();
+        $usuarios = $modeloUsuario->consultarDeportesUsuarios();
+        
+        $this->vista = 'deportesUsuarios';
+        return ['usuarios' => $usuarios];
+    }
+    
+    public function totalDeportes() {
+        $modeloUsuario = new MUsuario();
+        $total = $modeloUsuario->consultarTotalDeportes();
+        
+        $this->vista = 'totalDeportes';
+        return ['total' => $total];
+    }
+    
+    public function deportes() {
+        $modeloUsuario = new MUsuario();
+        $deportes = $modeloUsuario->consultarDeportesConTotal();
+        
+        $this->vista = 'deportes';
+        return ['deportes' => $deportes];
     }
 }
 ?>

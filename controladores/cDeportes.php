@@ -103,7 +103,7 @@ class CDeportes
             $imagen = $imagenActual; // Por defecto mantenemos la imagen que ya tenía
 
             if ($id && $nombre) {
-                // Si me suben una nueva imagen...
+                // Si me suben una nueva imagen
                 if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
 
                     // Borro la imagen vieja del servidor para no acumular basura

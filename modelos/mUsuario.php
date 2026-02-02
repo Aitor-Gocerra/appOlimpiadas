@@ -112,14 +112,11 @@ class MUsuario extends Conexion {
         return $stmt->fetchAll();
     }
 
-    /**
-     * Consulta el total de deportes que tienen alumnos inscritos (Proceso 5)
-     */
-    public function consultarTotalDeportes()
-    {
+    public function consultarTotalDeportes(){
         // Cuento los ids de deportes distintos que hay en la tabla de inscripciones
-        $sql = "SELECT COUNT(DISTINCT idDeporte) as total
-                FROM Usuarios_deportes";
+        $sql = "
+            SELECT COUNT(DISTINCT idDeporte) as total
+            FROM Usuarios_deportes";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->execute();
@@ -127,14 +124,11 @@ class MUsuario extends Conexion {
         return $resultado['total'];
     }
 
-    /**
-     * Consulta cada deporte con el total de usuarios inscritos (Proceso 6)
-     */
-    public function consultarDeportesConTotal()
-    {
+    public function consultarDeportesConTotal(){
         // Saco el nombre del deporte y cuento cuántos usuarios tiene asociados
         // Uso LEFT JOIN por si hay deportes sin ningún usuario, que salgan con 0
-        $sql = "SELECT 
+        $sql = "
+                SELECT 
                     Deportes.nombreDep, 
                     COUNT(Usuarios_deportes.idUsuario) as totalUsuarios
                 FROM Deportes

@@ -3,10 +3,6 @@ require_once 'mConexion.php';
 
 class MDeporte extends Conexion {
     
-    /**
-     * Obtiene todos los deportes disponibles
-     * @return array Lista de deportes con idDeporte, nombreDep e imagen
-     */
     public function obtenerTodosDeportes() {
         try {
             $sql = "

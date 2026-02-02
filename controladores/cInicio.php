@@ -1,19 +1,16 @@
 <?php
 
-class CInicio {
-    
-    public $vista;
-    
-    public function __construct() {
-        $this->vista = '';
+    class CInicio {
+        
+        public $vista;
+        
+        public function __construct() {
+            $this->vista = '';
+        }
+        
+        public function index() {
+            $this->vista = 'inicio';
+            return [];
+        }
     }
-    
-    /**
-     * Muestra el menú principal con opciones de Login e Inscripción
-     */
-    public function index() {
-        $this->vista = 'inicio';
-        return [];
-    }
-}
 ?>

@@ -30,6 +30,10 @@ if (file_exists($rutaArchivoControlador)) {
         if ($objControlador->vista != '') {
             $rutaVista = RUTA_VISTAS . $objControlador->vista . '.php';
 
+            // --- INICIO DEPURACIÓN ---
+            // Descomenta esto para ver qué ruta está intentando cargar
+            echo "Intento cargar la vista: " . $rutaVista . "<br>"; 
+            // -------------------------
             if (is_array($datos))
                 extract($datos);
 

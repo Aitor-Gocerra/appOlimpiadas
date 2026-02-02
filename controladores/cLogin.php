@@ -9,17 +9,11 @@ class CLogin {
         $this->vista = '';
     }
     
-    /**
-     * Muestra el formulario de login
-     */
     public function mostrarFormulario() {
         $this->vista = 'login';
         return [];
     }
-    
-    /**
-     * Procesa el inicio de sesión
-     */
+
     public function procesarLogin($datos) {
         $mensaje = '';
         
@@ -56,9 +50,6 @@ class CLogin {
         }
     }
     
-    /**
-     * Cierra la sesión del usuario
-     */
     public function cerrarSesion() {
         session_start();
         session_destroy();

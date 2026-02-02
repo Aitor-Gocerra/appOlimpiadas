@@ -9,7 +9,10 @@ class MDeporte extends Conexion {
      */
     public function obtenerTodosDeportes() {
         try {
-            $sql = "SELECT idDeporte, nombreDep, imagen FROM Deportes ORDER BY nombreDep";
+            $sql = "
+                SELECT idDeporte, nombreDep, imagen 
+                FROM Deportes ORDER BY nombreDep";
+
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -19,12 +22,13 @@ class MDeporte extends Conexion {
         }
     }
 
-    /**
-     * Obtiene un deporte por su ID
-     */
     public function obtenerDeporte($id) {
         try {
-            $sql = "SELECT * FROM Deportes WHERE idDeporte = :id";
+            $sql = "
+                SELECT * 
+                FROM Deportes 
+                WHERE idDeporte = :id";
+
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute([':id' => $id]);
             return $stmt->fetch();
@@ -34,12 +38,12 @@ class MDeporte extends Conexion {
         }
     }
 
-    /**
-     * Inserta un nuevo deporte
-     */
     public function insertarDeporte($nombre, $imagen = null) {
         try {
-            $sql = "INSERT INTO Deportes (nombreDep, imagen) VALUES (:nombre, :imagen)";
+            $sql = "
+                INSERT INTO Deportes (nombreDep, imagen) 
+                VALUES (:nombre, :imagen)";
+
             $stmt = $this->conexion->prepare($sql);
             return $stmt->execute([':nombre' => $nombre, ':imagen' => $imagen]);
         } catch (PDOException $e) {
@@ -48,12 +52,13 @@ class MDeporte extends Conexion {
         }
     }
 
-    /**
-     * Actualiza un deporte existente
-     */
     public function actualizarDeporte($id, $nombre, $imagen = null) {
         try {
-            $sql = "UPDATE Deportes SET nombreDep = :nombre, imagen = :imagen WHERE idDeporte = :id";
+            $sql = "
+                UPDATE Deportes 
+                SET nombreDep = :nombre, imagen = :imagen 
+                WHERE idDeporte = :id";
+
             $params = [':nombre' => $nombre, ':imagen' => $imagen, ':id' => $id];
             
             // Si la imagen es null, no la actualizamos (mantenemos la anterior)
@@ -70,12 +75,12 @@ class MDeporte extends Conexion {
         }
     }
 
-    /**
-     * Borra un deporte
-     */
     public function borrarDeporte($id) {
         try {
-            $sql = "DELETE FROM Deportes WHERE idDeporte = :id";
+            $sql = "
+                DELETE FROM Deportes 
+                WHERE idDeporte = :id";
+                
             $stmt = $this->conexion->prepare($sql);
             return $stmt->execute([':id' => $id]);
         } catch (PDOException $e) {

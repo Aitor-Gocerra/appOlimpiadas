@@ -12,8 +12,8 @@ class MDeporte extends Conexion {
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            error_log("Error al obtener deportes: " . $e->getMessage());
+        } catch (PDOException $error) {
+            error_log("Error al obtener deportes: " . $error->getMessage());
             return [];
         }
     }
@@ -28,8 +28,8 @@ class MDeporte extends Conexion {
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute([':id' => $id]);
             return $stmt->fetch();
-        } catch (PDOException $e) {
-            error_log("Error al obtener deporte: " . $e->getMessage());
+        } catch (PDOException $error) {
+            error_log("Error al obtener deporte: " . $error->getMessage());
             return null;
         }
     }
@@ -42,8 +42,8 @@ class MDeporte extends Conexion {
 
             $stmt = $this->conexion->prepare($sql);
             return $stmt->execute([':nombre' => $nombre, ':imagen' => $imagen]);
-        } catch (PDOException $e) {
-            error_log("Error al insertar deporte: " . $e->getMessage());
+        } catch (PDOException $error) {
+            error_log("Error al insertar deporte: " . $error->getMessage());
             return false;
         }
     }
@@ -65,8 +65,8 @@ class MDeporte extends Conexion {
             
             $stmt = $this->conexion->prepare($sql);
             return $stmt->execute($params);
-        } catch (PDOException $e) {
-            error_log("Error al actualizar deporte: " . $e->getMessage());
+        } catch (PDOException $error) {
+            error_log("Error al actualizar deporte: " . $error->getMessage());
             return false;
         }
     }
@@ -79,8 +79,8 @@ class MDeporte extends Conexion {
                 
             $stmt = $this->conexion->prepare($sql);
             return $stmt->execute([':id' => $id]);
-        } catch (PDOException $e) {
-            error_log("Error al borrar deporte: " . $e->getMessage());
+        } catch (PDOException $error) {
+            error_log("Error al borrar deporte: " . $error->getMessage());
             return false;
         }
     }

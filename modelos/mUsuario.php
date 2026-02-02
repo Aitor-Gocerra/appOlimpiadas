@@ -56,8 +56,8 @@ class MUsuario extends Conexion {
             $stmt->execute();
             // Devuelvo el ID del nuevo usuario creado
             return $this->conexion->lastInsertId();
-        } catch (PDOException $e) {
-            error_log("Error al registrar usuario: " . $e->getMessage());
+        } catch (PDOException $error) {
+            error_log("Error al registrar usuario: " . $error->getMessage());
             return false;
         }
     }
@@ -77,22 +77,20 @@ class MUsuario extends Conexion {
             }
 
             return true;
-        } catch (PDOException $e) {
-            error_log("Error al inscribir deportes: " . $e->getMessage());
+        } catch (PDOException $error) {
+            error_log("Error al inscribir deportes: " . $error->getMessage());
             return false;
         }
     }
 
-    /**
-     * Consulta todos los usuarios con sus deportes (Proceso 4)
-     */
     public function consultarDeportesUsuarios()
     {
         // Uso una consulta compleja con JOINs para traer toda la info de golpe:
         // 1. LEFT JOIN 'Usuarios_deportes': para traer usuarios aunque NO tengan deportes
         // 2. LEFT JOIN 'Deportes': para saber el nombre del deporte
         // 3. GROUP_CONCAT: Me junta los nombres de los deportes en un solo texto separado por comas
-        $sql = "SELECT 
+        $sql = "
+                SELECT 
                     Usuarios.idUsuario, 
                     Usuarios.nombreUsuario, 
                     Usuarios.apeNombre, 

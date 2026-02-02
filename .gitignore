@@ -28,3 +28,10 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Scripts SQL locales (no subir a producción)
+sql/crear_usuarios_local.sql
+sql/update_deportes_imagen.sql
+
+# Imágenes subidas por usuarios
+imagenes/deportes/

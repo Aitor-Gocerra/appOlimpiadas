@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body class="centered">
     <div class="card shadow" style="max-width: 600px; width: 100%;">
         <div class="card-header bg-primary text-white text-center">
@@ -19,13 +21,17 @@
                 <a href="index.php?c=Admin&m=deportesUsuarios" class="btn btn-outline-primary">
                     <i class="bi bi-bar-chart-fill"></i> Deportes_Usuarios
                 </a>
-                
+
                 <a href="index.php?c=Admin&m=totalDeportes" class="btn btn-outline-primary">
                     <i class="bi bi-graph-up"></i> Total_Deportes
                 </a>
-                
+
                 <a href="index.php?c=Admin&m=deportes" class="btn btn-outline-primary">
                     <i class="bi bi-trophy-fill"></i> Deportes
+                </a>
+
+                <a href="index.php?c=Deportes&m=gestionDeportes" class="btn btn-outline-success">
+                    <i class="bi bi-gear-fill"></i> Gestión Deportes (CRUD)
                 </a>
             </div>
         </div>
@@ -35,7 +41,8 @@
             </a>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

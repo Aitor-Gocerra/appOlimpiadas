@@ -1,36 +1,38 @@
-
 CREATE DATABASE olimpiadas;
 USE  olimpiadas;
 
-CREATE TABLE Deportes (
-  idDeporte 	tinyint unsigned AUTO_INCREMENT PRIMARY KEY,
-  nombreDep   	varchar(15) NOT NULL
+CREATE TABLE IF NOT EXISTS Deportes (
+  idDeporte tinyint unsigned AUTO_INCREMENT PRIMARY KEY,
+  nombreDep varchar(15) NOT NULL,
+  imagen varchar(255) NULL
   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
   
-CREATE TABLE Usuarios (
+CREATE TABLE IF NOT EXISTS Usuarios (
   idUsuario smallint unsigned AUTO_INCREMENT PRIMARY KEY,
   nombreUsuario varchar(30) NOT NULL UNIQUE,
   apeNombre varchar(60) NOT NULL,
   password varchar(100) NOT NULL,
   correo varchar(60) NOT NULL,
   telefono char(9) NULL,
-  perfil  ENUM('c', 'u') NOT NULL
+  perfil ENUM('c', 'u') NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE Usuarios_deportes (
+  
+CREATE TABLE IF NOT EXISTS Usuarios_deportes (
 	idDeporte tinyint unsigned NOT NULL,
 	idUsuario smallint unsigned NOT NULL,
-	PRIMARY KEY (idDeporte, idUsuario)
+	PRIMARY KEY (idDeporte, idUsuario),
+    FOREIGN KEY (idDeporte) REFERENCES Deportes(idDeporte) ON DELETE CASCADE,
+    FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO Deportes(nombreDep) VALUES
-			('fútbol'),
-			('baloncesto'),
-			('padel'),
-			('tenis de mesa');
+INSERT INTO Deportes(nombreDep, imagen) VALUES
+			('fútbol', NULL),
+			('baloncesto', NULL),
+			('padel', NULL),
+			('tenis de mesa', NULL);
 	
 		
-INSERT INTO usuarios (nombreUsuario, apeNombre, password, correo, telefono, perfil) VALUES
+INSERT INTO Usuarios (nombreUsuario, apeNombre, password, correo, telefono, perfil) VALUES
 ('coordinador', 'Coordinador Escuelas Deportivas', '123456', 'CoordED@evg.es',  '654321123','c'),
 ('usuario1', 'usuario 1 Escuelas Deportivas', '1234', 'usuario1@evg.es',  '667788991','u'),
 ('usuario2', 'usuario 2 Escuelas Deportivas', '1234', 'usuario2@evg.es',  NULL,'u'),

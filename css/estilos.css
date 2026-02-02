@@ -66,3 +66,25 @@ body.scrollable {
         font-size: 3.5rem;
     }
 }
+
+/* Imágenes de deportes */
+.sport-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.sport-preview {
+    max-height: 150px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.sport-icon-small {
+    width: 30px; 
+    height: 30px; 
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 8px;
+}
